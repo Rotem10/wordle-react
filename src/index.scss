@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Oswald&family=Zen+Tokyo+Zoo&display=swap');
+
+$light-yellow: #fcffa6;
+$light-green: #c1ffd7;
+$light-blue: #b5deff;
+$light-purple: #cab8ff;
+
+$header-font: 'Zen Tokyo Zoo', cursive;
+$body-font: 'Lato', sans-serif;
+
+body {
+  font-family: $body-font;
+}
+
+h1 {
+  margin: 0;
+  font-size: 3.5em;
+  letter-spacing: 0.25rem;
+  font-family: $header-font;
+  color: $light-blue;
+}
