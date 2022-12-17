@@ -8,7 +8,6 @@ export const tileSlice = createSlice({
   reducers: {
     nextId: (state) => {
       state.id++;
-      console.log(state.id);
     },
   },
 });
