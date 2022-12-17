@@ -1,20 +1,7 @@
-// import React, { useContext } from 'react';
-// import { appContext } from '../providers/appContext';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { change } from '../store/letterValueSlice';
 
-// type SetTile = React.Dispatch<React.SetStateAction<number>>;
-// type SetValue = React.Dispatch<React.SetStateAction<string>>;
-// type UseApp = {
-//   currentTile: number;
-//   setCurrentTile: SetTile;
-//   currentValue: string;
-//   setCurrentValue: SetValue;
-// };
 export function Keyboard(): JSX.Element {
-  // const { currentTile, setCurrentTile, setCurrentValue }: UseApp =
-  //   useContext(appContext);
-
   const dispatch = useDispatch();
 
   const firstRowKeys: string[] = [
@@ -33,8 +20,6 @@ export function Keyboard(): JSX.Element {
   const thirdRowKeys: string[] = ['z', 'x', 'c', 'v', 'b', 'n', 'm'];
 
   const handlekeyClicked = (event: MouseEventHandler<HTMLButtonElement>) => {
-    // setCurrentValue(event.target.id.toUpperCase());
-    // setCurrentTile(currentTile + 1);
     dispatch(change(event.target.id.toUpperCase()));
   };
 

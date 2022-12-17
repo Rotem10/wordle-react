@@ -1,24 +1,12 @@
 import { useEffect, useRef } from 'react';
-// import { appContext } from '../providers/appContext';
 import { useSelector, useDispatch } from 'react-redux';
 import { nextId } from '../store/tileSlice';
 import { change } from '../store/letterValueSlice';
 
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 type InputRefs = React.MutableRefObject<HTMLInputElement[]>;
-// type SetTile = React.Dispatch<React.SetStateAction<number>>;
-// type SetValue = React.Dispatch<React.SetStateAction<string>>;
-// type UseApp = {
-//   currentTile: number;
-//   setCurrentTile: SetTile;
-//   currentValue: string;
-//   setCurrentValue: SetValue;
-// };
 
 export function Board(): JSX.Element {
-  // const { currentTile, setCurrentTile, currentValue, setCurrentValue }: UseApp =
-  //   useContext(appContext);
-
   const currentTile = useSelector((state) => state.currentTile.id);
   const currentValue = useSelector((state) => state.currentValue.value);
   const dispatch = useDispatch();
@@ -48,19 +36,11 @@ export function Board(): JSX.Element {
   };
 
   const handleInputChange = (event: InputEvent) => {
-    // event.target.value = event.target.value.toUpperCase();
-    // setCurrentTile(currentTile + 1);
-
     const alphaOnlyPattern: RegExp = new RegExp('^[a-zA-Z ]+$');
-
-    if (alphaOnlyPattern.test(event.target.value)) {
-      dispatch(change(event.target.value.toUpperCase()));
-    } else {
-      event.target.value = '';
-    }
+    alphaOnlyPattern.test(event.target.value)
+      ? dispatch(change(event.target.value.toUpperCase()))
+      : (event.target.value = '');
   };
-  //   parseInt(event.target.id)
-  //   id={index.toString()}
 
   const isLastTileInRow = () => {
     return (
