@@ -31,6 +31,9 @@ export function Board(): JSX.Element {
     if (currentValue) {
       tileInputRefs.current[currentTile].value = currentValue;
       dispatch(nextId());
+      if (isLastTileInRow()) {
+        alert('done');
+      }
     }
   }, [currentValue]);
 
@@ -48,7 +51,7 @@ export function Board(): JSX.Element {
     // event.target.value = event.target.value.toUpperCase();
     // setCurrentTile(currentTile + 1);
 
-    const alphaOnlyPattern = new RegExp('^[a-zA-Z ]+$');
+    const alphaOnlyPattern: RegExp = new RegExp('^[a-zA-Z ]+$');
 
     if (alphaOnlyPattern.test(event.target.value)) {
       dispatch(change(event.target.value.toUpperCase()));
@@ -58,6 +61,18 @@ export function Board(): JSX.Element {
   };
   //   parseInt(event.target.id)
   //   id={index.toString()}
+
+  const isLastTileInRow = () => {
+    return (
+      currentTile === 4 ||
+      currentTile === 9 ||
+      currentTile === 14 ||
+      currentTile === 19 ||
+      currentTile === 24 ||
+      currentTile === 29
+    );
+  };
+
   return (
     <div className='board'>
       {tiles.map(

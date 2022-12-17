@@ -7,7 +7,9 @@ export const tileSlice = createSlice({
   },
   reducers: {
     nextId: (state) => {
-      state.id++;
+      if (state.id < 29) {
+        state.id++;
+      }
     },
   },
 });
