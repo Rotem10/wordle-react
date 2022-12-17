@@ -51,7 +51,14 @@ export function Board(): JSX.Element {
   const handleInputChange = (event: InputEvent) => {
     // event.target.value = event.target.value.toUpperCase();
     // setCurrentTile(currentTile + 1);
-    dispatch(change(event.target.value.toUpperCase()));
+
+    const alphaOnlyPattern = new RegExp('^[a-zA-Z ]+$');
+
+    if (alphaOnlyPattern.test(event.target.value)) {
+      dispatch(change(event.target.value.toUpperCase()));
+    } else {
+      event.target.value = '';
+    }
   };
   //   parseInt(event.target.id)
   //   id={index.toString()}
