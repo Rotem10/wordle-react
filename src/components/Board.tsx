@@ -23,10 +23,6 @@ export function Board(): JSX.Element {
   const currentValue = useSelector((state) => state.currentValue.value);
   const dispatch = useDispatch();
 
-  useEffect((): void => {
-    tileInputRefs.current[0].focus();
-  }, []);
-
   useEffect(() => {
     tileInputRefs.current[currentTile].focus();
   }, [currentTile]);
