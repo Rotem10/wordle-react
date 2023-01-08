@@ -1,6 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Slice, Draft } from '@reduxjs/toolkit';
 
-export const tileSlice = createSlice({
+type TileSlice = Slice<
+  {
+    id: number;
+  },
+  {
+    nextId: (
+      state: Draft<{
+        id: number;
+      }>
+    ) => void;
+  },
+  'currentTileId'
+>;
+
+export const tileSlice: TileSlice = createSlice({
   name: 'currentTileId',
   initialState: {
     id: 0,

@@ -1,6 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Slice, Draft } from '@reduxjs/toolkit';
 
-export const letterValueSlice = createSlice({
+type LetterValueSlice = Slice<
+  {
+    value: string;
+  },
+  {
+    change: (
+      state: Draft<{
+        value: string;
+      }>,
+      action: {
+        payload: any;
+        type: string;
+      }
+    ) => void;
+  },
+  'letterValue'
+>;
+
+export const letterValueSlice: LetterValueSlice = createSlice({
   name: 'letterValue',
   initialState: {
     value: '',
