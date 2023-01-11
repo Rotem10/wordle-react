@@ -1,7 +1,7 @@
 import './App.scss';
 import { Board } from './components/Board';
-import { Header } from './components/Header';
 import { Keyboard } from './components/Keyboard';
+import { Header } from './components/Header';
 
 function App() {
   return (
@@ -16,9 +16,3 @@ function App() {
 }
 
 export default App;
-
-// import { useAppState } from './hooks/useAppState';
-// import { appContext } from './providers/appContext';
-// const useApp = useAppState();
-// <appContext.Provider value={useApp}>
-//       </appContext.Provider>

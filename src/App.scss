@@ -2,15 +2,16 @@ $light-purple: #cab8ff;
 $light-blue: #b5deff;
 $dark-blue: #1c315e;
 $dark-purple: #a489f8;
+$medium-blue: #4f7fe7;
 
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
+  color: $dark-blue;
 }
 .App {
-  // font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   display: grid;
   grid-template-rows: 0.7fr 5fr;
   grid-template-columns: 1fr 1.5fr 1fr;
@@ -23,6 +24,46 @@ header {
   grid-area: header;
   display: grid;
   justify-items: center;
+}
+.welcome {
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    font-size: 5rem;
+  }
+}
+.navbar {
+  font-size: 1.5rem;
+  margin: 0 1.5rem 2rem 1.5rem;
+  .links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+    .nav-link {
+      color: $medium-blue;
+      &:hover {
+        color: $dark-blue;
+      }
+    }
+    .active {
+      color: $dark-blue;
+    }
+  }
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+    button {
+      font-size: 1.5rem;
+      color: $medium-blue;
+      padding: 4px 8px;
+      &:active {
+        color: $dark-blue;
+      }
+    }
+  }
 }
 main {
   grid-area: main;
@@ -60,7 +101,6 @@ main {
       border: 2px solid $dark-purple;
     }
   }
-
   .keyboard {
     width: fit-content;
     display: grid;
