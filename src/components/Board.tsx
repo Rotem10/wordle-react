@@ -36,7 +36,7 @@ export function Board(): JSX.Element {
   };
 
   const handleInputChange = (event: InputEvent) => {
-    const alphaOnlyPattern: RegExp = new RegExp('^[a-zA-Z ]+$');
+    const alphaOnlyPattern: RegExp = new RegExp('^[a-zA-Z]+$');
     alphaOnlyPattern.test(event.target.value)
       ? dispatch(change(event.target.value.toUpperCase()))
       : (event.target.value = '');

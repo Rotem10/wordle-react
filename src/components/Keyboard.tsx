@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react';
 import { useDispatch } from 'react-redux';
 import { change } from '../store/letterValueSlice';
 
