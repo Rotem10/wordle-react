@@ -8,6 +8,7 @@ import App from './App';
 import { Welcome } from './pages/Welcome';
 import { NavBar } from './components/NavBar';
 import { HelpModal } from './components/HelpModal';
+import { UserFormModal } from './components/userFormModal';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Router>
         <NavBar />
         <HelpModal />
+        <UserFormModal />
         <Routes>
           <Route path='/' element={<Welcome />} />
           <Route path='/app' element={<App />} />
