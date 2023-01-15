@@ -1,11 +1,13 @@
 import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signIn, signOut } from '../store/userSlice';
+import { RootState } from '../store/store';
+import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 
 export function UserFormModal(): JSX.Element {
-  const userName = useSelector((state) => state.user.userName);
-  const dispatch = useDispatch();
-  const inputRef = useRef(null);
+  const userName = useSelector((state: RootState) => state.user.userName);
+  const dispatch: Dispatch<AnyAction> = useDispatch();
+  const inputRef: React.MutableRefObject<null> = useRef(null);
   const handleSignUp = () => {
     let inputUserName: String = '';
     if (inputRef.current) {

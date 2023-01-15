@@ -5,12 +5,12 @@ type LetterValueSlice = Slice<
     value: string;
   },
   {
-    change: (
+    changeValue: (
       state: Draft<{
         value: string;
       }>,
       action: {
-        payload: any;
+        payload: string;
         type: string;
       }
     ) => void;
@@ -24,11 +24,14 @@ export const letterValueSlice: LetterValueSlice = createSlice({
     value: '',
   },
   reducers: {
-    change: (state, action) => {
-      state.value = action.payload;
+    changeValue: (state, action) => {
+      if (state.value === action.payload) {
+        return { ...state, value: action.payload.toUpperCase() };
+      }
+      return { ...state, value: action.payload };
     },
   },
 });
 
-export const { change } = letterValueSlice.actions;
+export const { changeValue } = letterValueSlice.actions;
 export default letterValueSlice.reducer;

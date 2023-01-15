@@ -1,6 +1,5 @@
-import { MouseEventHandler } from 'react';
 import { useDispatch } from 'react-redux';
-import { change } from '../store/letterValueSlice';
+import { changeValue } from '../store/letterValueSlice';
 
 export function Keyboard(): JSX.Element {
   const dispatch = useDispatch();
@@ -20,8 +19,8 @@ export function Keyboard(): JSX.Element {
   const secondRowKeys: string[] = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'];
   const thirdRowKeys: string[] = ['z', 'x', 'c', 'v', 'b', 'n', 'm'];
 
-  const handlekeyClicked = (event: MouseEventHandler<HTMLButtonElement>) => {
-    dispatch(change(event.target.id.toUpperCase()));
+  const handlekeyClicked = (event: React.MouseEvent<HTMLButtonElement>) => {
+    dispatch(changeValue(event.target.id));
   };
 
   function createRow(keys: string[]): JSX.Element[] {

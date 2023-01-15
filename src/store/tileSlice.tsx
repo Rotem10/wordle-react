@@ -9,7 +9,11 @@ type TileSlice = Slice<
       state: Draft<{
         id: number;
       }>
-    ) => void;
+    ) =>
+      | {
+          id: number;
+        }
+      | undefined;
   },
   'currentTileId'
 >;
@@ -22,7 +26,8 @@ export const tileSlice: TileSlice = createSlice({
   reducers: {
     nextId: (state) => {
       if (state.id < 29) {
-        state.id++;
+        const nextId = state.id + 1;
+        return { ...state, id: nextId };
       }
     },
   },

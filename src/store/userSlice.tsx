@@ -10,6 +10,15 @@ type userSlice = Slice<
         userName: string | null;
       }>
     ) => void;
+    signIn: (
+      state: Draft<{
+        userName: string | null;
+      }>,
+      action: {
+        payload: string;
+        type: string;
+      }
+    ) => void;
   },
   'user'
 >;
@@ -22,11 +31,11 @@ export const userSlice = createSlice({
   reducers: {
     signOut: (state) => {
       localStorage.setItem('userName', '');
-      state.userName = '';
+      return { ...state, userName: '' };
     },
     signIn: (state, action) => {
       localStorage.setItem('userName', action.payload);
-      state.userName = action.payload;
+      return { ...state, userName: action.payload };
     },
   },
 });
