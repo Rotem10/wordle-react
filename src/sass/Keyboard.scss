@@ -1,0 +1,41 @@
+@import './colors.scss';
+
+.keyboard {
+  width: fit-content;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  row-gap: 0.4rem;
+  height: fit-content;
+
+  div[class*='key_row'] {
+    display: flex;
+    justify-content: center;
+    div {
+      margin-right: 0.4rem;
+    }
+    div.key_enter,
+    div.key_del {
+      button {
+        width: 4.2rem;
+        padding: 0.1rem;
+        img {
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+    }
+  }
+  button {
+    height: 3.5rem;
+    width: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.6rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: $light-blue;
+    color: $dark-blue;
+  }
+}

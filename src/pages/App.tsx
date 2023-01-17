@@ -1,7 +1,7 @@
-import './App.scss';
-import { Board } from './components/Board';
-import { Keyboard } from './components/Keyboard';
-import { Header } from './components/Header';
+import '../sass/App.scss';
+import { Board } from '../components/Board';
+import { Keyboard } from '../components/Keyboard';
+import { Header } from '../components/Header';
 
 function App() {
   return (

@@ -20,7 +20,7 @@ export function Keyboard(): JSX.Element {
   const thirdRowKeys: string[] = ['z', 'x', 'c', 'v', 'b', 'n', 'm'];
 
   const handlekeyClicked = (event: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch(changeValue(event.target.id));
+    dispatch(changeValue((event.target as Element).id));
   };
 
   function createRow(keys: string[]): JSX.Element[] {

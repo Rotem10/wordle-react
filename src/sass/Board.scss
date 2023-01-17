@@ -1,0 +1,42 @@
+@import './colors.scss';
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  column-gap: 0.3rem;
+  row-gap: 0.3rem;
+  justify-items: center;
+  div {
+    border: 2px solid $light-purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    border: none;
+    width: 3.6rem;
+    height: 3.6rem;
+    padding: 0;
+    text-align: center;
+    color: $dark-blue;
+    font-size: 2rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+  .green {
+    background-color: $green;
+  }
+  .yellow {
+    background-color: $yellow;
+  }
+  .grey {
+    background-color: $grey;
+  }
+  .full {
+    border: 2px solid $dark-purple;
+  }
+}

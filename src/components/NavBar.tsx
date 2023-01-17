@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 export function NavBar(): JSX.Element {
-  const userName = useSelector((state) => state.user.userName);
+  const userName = useSelector((state: RootState) => state.user.userName);
 
   return (
     <nav className='navbar navbar-expand-lg navbar-light border-bottom border-2 d-flex justify-content-between'>

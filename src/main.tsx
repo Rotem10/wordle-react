@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './index.scss';
+import './sass/index.scss';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import App from './App';
+import App from './pages/App';
 import { Welcome } from './pages/Welcome';
 import { NavBar } from './components/NavBar';
 import { HelpModal } from './components/HelpModal';

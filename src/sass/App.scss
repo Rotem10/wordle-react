@@ -1,0 +1,25 @@
+@import './colors.scss';
+@import './Header.scss';
+@import './NavBar.scss';
+@import './Welcome.scss';
+@import './Board.scss';
+@import './Keyboard.scss';
+
+.App {
+  display: grid;
+  grid-template-rows: 0.7fr 5fr;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-areas:
+    'header header header'
+    ' . main .';
+  justify-items: center;
+}
+
+main {
+  grid-area: main;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 1.5rem;
+  justify-items: center;
+  width: fit-content;
+}
