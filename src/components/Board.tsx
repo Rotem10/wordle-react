@@ -1,8 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { nextId } from '../store/tileSlice';
-import { changeValue } from '../store/letterValueSlice';
-import { compareValues } from '../store/wordSlice';
+import { nextId, checkLastTileInRow } from '../store/tileSlice';
+import {
+  changeValue,
+  setValueChanged,
+  setGameOver,
+} from '../store/letterValueSlice';
+import { compareValues, updateUserWord, checkRow } from '../store/wordSlice';
 import { RootState } from '../store/store';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 
@@ -22,39 +26,90 @@ export function Board(): JSX.Element {
   let currentValue: string = useSelector(
     (state: RootState) => state.currentValue.value
   );
+  const values: string[] = useSelector(
+    (state: RootState) => state.currentValue.values
+  );
   const compares: ValuesCompare[] = useSelector(
     (state: RootState) => state.word.compares
   );
+
+  const isSuccess: boolean = useSelector(
+    (state: RootState) => state.word.isSuccess
+  );
+
+  const isLastTileInRow: boolean = useSelector(
+    (state: RootState) => state.currentTile.isLastTileInRow
+  );
+
+  const valueChanged: boolean = useSelector(
+    (state: RootState) => state.currentValue.valueChanged
+  );
+
+  const game: boolean = useSelector(
+    (state: RootState) => state.currentValue.game
+  );
+
+  const firstRenderRef = useRef(true);
+
   const dispatch: Dispatch<AnyAction> = useDispatch();
 
   useEffect(() => {
     tileInputRefs.current[currentTile].focus();
+    dispatch(checkLastTileInRow(true));
   }, [currentTile]);
 
   useEffect(() => {
-    if (currentValue) {
+    if (currentValue && valueChanged) {
       const wordIndex: number = convertTileIndexToWordIndex();
       currentValue = currentValue.toLowerCase();
       dispatch(compareValues({ currentValue, wordIndex, currentTile }));
 
       tileInputRefs.current[currentTile].value = currentValue.toUpperCase();
+
+      dispatch(updateUserWord(currentValue));
+
+      dispatch(checkRow());
+
       dispatch(nextId());
 
-      if (isLastTileInRow()) {
-        alert('done');
+      dispatch(setValueChanged());
+
+      if (currentTile === 29) {
+        alert('Game Over');
+        dispatch(setGameOver());
       }
     }
   }, [currentValue]);
 
   useEffect(() => {
-    if (currentTile > 0) {
+    if (isLastTileInRow && firstRenderRef) {
+      if (!isSuccess) {
+        alert('end of row');
+      }
+      dispatch(checkLastTileInRow(false));
+      firstRenderRef.current = false;
+    }
+  }, [isLastTileInRow]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      alert('Win');
+      dispatch(setGameOver());
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (currentTile && firstRenderRef && game) {
       tileInputRefs.current[currentTile - 1].classList.add(
         compares[currentTile - 1]
       );
+      const keyButton: HTMLElement | null = document.getElementById(
+        `${currentValue.toLowerCase()}`
+      );
+      keyButton?.classList.add(compares[currentTile - 1]);
     }
   }, [compares]);
 
-  const tiles: string[] = Array(30).fill('tile_');
   const tileInputRefs: InputRefs = useRef([]);
   tileInputRefs.current = [];
 
@@ -65,12 +120,14 @@ export function Board(): JSX.Element {
   };
 
   const handleInputChange = (event: InputEvent) => {
-    const value = event.target.value.toLowerCase();
-    const alphaOnlyPattern: RegExp = new RegExp('^[a-zA-Z]+$');
-    if (alphaOnlyPattern.test(event.target.value)) {
-      dispatch(changeValue(value));
-    } else {
-      event.target.value = '';
+    if (game) {
+      const value = event.target.value.toLowerCase();
+      const alphaOnlyPattern: RegExp = new RegExp('^[a-zA-Z]+$');
+      if (alphaOnlyPattern.test(event.target.value)) {
+        dispatch(changeValue(value));
+      } else {
+        event.target.value = '';
+      }
     }
   };
 
@@ -96,27 +153,18 @@ export function Board(): JSX.Element {
     }
   };
 
-  const isLastTileInRow = (): boolean => {
-    return (
-      currentTile === 4 ||
-      currentTile === 9 ||
-      currentTile === 14 ||
-      currentTile === 19 ||
-      currentTile === 24 ||
-      currentTile === 29
-    );
-  };
-
   return (
     <div className='board'>
-      {tiles.map(
-        (tile: string, index: number): JSX.Element => (
-          <div className={tile + index} key={index}>
+      {values.map(
+        (value: string, index: number): JSX.Element => (
+          <div className={`tile_${index}`} key={index}>
             <input
               type='text'
               maxLength={1}
               ref={addToRefs}
               onChange={handleInputChange}
+              value={value.toUpperCase()}
+              className={compares[index]}
             />
           </div>
         )

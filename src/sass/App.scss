@@ -22,4 +22,13 @@ main {
   grid-gap: 1.5rem;
   justify-items: center;
   width: fit-content;
+  .green {
+    background-color: $green;
+  }
+  .yellow {
+    background-color: $yellow;
+  }
+  .grey {
+    background-color: $grey;
+  }
 }

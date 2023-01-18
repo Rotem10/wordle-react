@@ -1,8 +1,13 @@
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { changeValue } from '../store/letterValueSlice';
+import { RootState } from '../store/store';
 
 export function Keyboard(): JSX.Element {
   const dispatch = useDispatch();
+
+  const game: boolean = useSelector(
+    (state: RootState) => state.currentValue.game
+  );
 
   const firstRowKeys: string[] = [
     'q',
@@ -20,7 +25,9 @@ export function Keyboard(): JSX.Element {
   const thirdRowKeys: string[] = ['z', 'x', 'c', 'v', 'b', 'n', 'm'];
 
   const handlekeyClicked = (event: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch(changeValue((event.target as Element).id));
+    if (game) {
+      dispatch(changeValue((event.target as Element).id));
+    }
   };
 
   function createRow(keys: string[]): JSX.Element[] {

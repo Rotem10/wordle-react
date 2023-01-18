@@ -10,22 +10,53 @@ enum ValuesCompare {
 type WordSlice = Slice<
   {
     word: string;
+    userWord: any[];
     compares: any[];
+    isSuccess: boolean;
   },
   {
     compareValues: (
       state: Draft<{
         word: string;
+        userWord: any[];
         compares: any[];
+        isSuccess: boolean;
       }>,
       action: {
         payload: any;
         type: string;
       }
     ) => {
-      compares: ValuesCompare[];
+      compares: any[];
       word: string;
+      userWord: any[];
+      isSuccess: boolean;
     };
+    updateUserWord: (
+      state: Draft<{
+        word: string;
+        userWord: any[];
+        compares: any[];
+        isSuccess: boolean;
+      }>,
+      action: {
+        payload: any;
+        type: string;
+      }
+    ) => {
+      compares: any[];
+      word: string;
+      userWord: any[];
+      isSuccess: boolean;
+    };
+    checkRow: (
+      state: Draft<{
+        word: string;
+        userWord: any[];
+        compares: any[];
+        isSuccess: boolean;
+      }>
+    ) => void;
   },
   'word'
 >;
@@ -34,7 +65,9 @@ export const wordSlice: WordSlice = createSlice({
   name: 'word',
   initialState: {
     word: 'apple',
+    userWord: Array(),
     compares: Array(30).fill(ValuesCompare.None),
+    isSuccess: false,
   },
   reducers: {
     compareValues: (state, action) => {
@@ -51,8 +84,23 @@ export const wordSlice: WordSlice = createSlice({
       }
       return { ...state, compares: newCompares };
     },
+    updateUserWord: (state, action) => {
+      let newUserWord = [...state.userWord];
+      if (state.userWord.length === 5) {
+        newUserWord = [];
+        newUserWord.push(action.payload);
+      } else {
+        newUserWord.push(action.payload);
+      }
+      return { ...state, userWord: newUserWord };
+    },
+    checkRow: (state) => {
+      const newIsSuccess =
+        JSON.stringify(state.userWord) === JSON.stringify(state.word.split(''));
+      state.isSuccess = newIsSuccess;
+    },
   },
 });
 
-export const { compareValues } = wordSlice.actions;
+export const { compareValues, updateUserWord, checkRow } = wordSlice.actions;
 export default wordSlice.reducer;
