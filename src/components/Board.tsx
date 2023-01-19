@@ -106,6 +106,9 @@ export function Board(): JSX.Element {
       const keyButton: HTMLElement | null = document.getElementById(
         `${currentValue.toLowerCase()}`
       );
+      if (keyButton?.classList[0]) {
+        keyButton?.classList.remove(keyButton?.classList[0]);
+      }
       keyButton?.classList.add(compares[currentTile - 1]);
     }
   }, [compares]);
