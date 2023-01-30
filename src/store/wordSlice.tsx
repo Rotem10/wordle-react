@@ -1,4 +1,5 @@
-import { createSlice, Slice, Draft } from '@reduxjs/toolkit';
+import { createSlice, Slice, Draft, createAsyncThunk } from '@reduxjs/toolkit';
+import getWord from './wordApi';
 
 enum ValuesCompare {
   None = '',
@@ -14,7 +15,25 @@ type WordSlice = Slice<
     compares: any[];
     isSuccess: boolean;
   },
+  // { word: string; userWord: any[]; compares: any[]; isSuccess: false; },
   {
+    setWord: (
+      state: Draft<{
+        word: string;
+        userWord: any[];
+        compares: any[];
+        isSuccess: boolean;
+      }>,
+      action: {
+        payload: any;
+        type: string;
+      }
+    ) => {
+      compares: any[];
+      word: string;
+      userWord: any[];
+      isSuccess: boolean;
+    };
     compareValues: (
       state: Draft<{
         word: string;
@@ -64,12 +83,15 @@ type WordSlice = Slice<
 export const wordSlice: WordSlice = createSlice({
   name: 'word',
   initialState: {
-    word: 'apple',
+    word: '',
     userWord: Array(),
     compares: Array(30).fill(ValuesCompare.None),
     isSuccess: false,
   },
   reducers: {
+    setWord: (state, action) => {
+      state.word = action.payload;
+    },
     compareValues: (state, action) => {
       const { currentValue, wordIndex, currentTile } = action.payload;
       const newCompares = [...state.compares];
@@ -102,5 +124,11 @@ export const wordSlice: WordSlice = createSlice({
   },
 });
 
-export const { compareValues, updateUserWord, checkRow } = wordSlice.actions;
+export const fetchWord = createAsyncThunk('word/fetchWord', async () => {
+  const response = await getWord();
+  return response;
+});
+
+export const { compareValues, updateUserWord, checkRow, setWord } =
+  wordSlice.actions;
 export default wordSlice.reducer;
