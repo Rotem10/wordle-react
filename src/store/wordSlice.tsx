@@ -1,5 +1,4 @@
-import { createSlice, Slice, Draft, createAsyncThunk } from '@reduxjs/toolkit';
-import getWord from './wordApi';
+import { createSlice, Slice, Draft } from '@reduxjs/toolkit';
 
 enum ValuesCompare {
   None = '',
@@ -15,7 +14,6 @@ type WordSlice = Slice<
     compares: any[];
     isSuccess: boolean;
   },
-  // { word: string; userWord: any[]; compares: any[]; isSuccess: false; },
   {
     setWord: (
       state: Draft<{
@@ -122,11 +120,6 @@ export const wordSlice: WordSlice = createSlice({
       state.isSuccess = newIsSuccess;
     },
   },
-});
-
-export const fetchWord = createAsyncThunk('word/fetchWord', async () => {
-  const response = await getWord();
-  return response;
 });
 
 export const { compareValues, updateUserWord, checkRow, setWord } =

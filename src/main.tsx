@@ -10,7 +10,7 @@ import { NavBar } from './components/NavBar';
 import { HelpModal } from './components/HelpModal';
 import { UserFormModal } from './components/UserFormModal';
 import { setWord } from './store/wordSlice';
-import getWord from './store/wordApi';
+import fetchWord from './store/wordApi';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -29,6 +29,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 );
 
 function main() {
-  getWord().then((word) => store.dispatch(setWord(word)));
+  fetchWord().then((word) => store.dispatch(setWord(word)));
 }
 main();
