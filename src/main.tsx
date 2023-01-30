@@ -27,7 +27,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     </Provider>
   </React.StrictMode>
 );
-// test
 function main() {
   fetchWord().then((word) => store.dispatch(setWord(word)));
 }
